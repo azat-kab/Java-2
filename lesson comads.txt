@@ -1,0 +1,176 @@
+package Lesson3;
+
+import java.util.*;
+
+public class MainCollections {
+    public static void main(String[] args) {
+//        int[] arr = {1,2,3,4,5};
+//        System.out.println(Arrays.toString(arr));
+//        int[] arr2 = new int[20];
+//        System.arraycopy(arr, 0, arr2, 0 , arr.length);
+//        System.out.println(Arrays.toString(arr2));
+
+//        ArrayList<Integer> ai = new ArrayList<>();
+//        ai.ensureCapacity(100000);
+//
+//        ai.add(1);
+//        ai.add(2);
+//        ai.add(3);
+//        ai.add(4);
+//
+//        ai.remove((Integer)2);
+////
+////        System.out.println(ai);
+//
+//        ArrayList<String> states = new ArrayList<>();
+//        states.add("Германия");
+//        states.add("� оссия");
+//        states.add("Франция");
+//        states.add("Франция");
+//        states.add("Италия");
+//        states.add("Испания");
+//     //   System.out.println(states);
+//
+////        for (int i = 0; i < states.size() ; i++) {
+////            if(states.get(i).equals("Франция")) {
+////                states.remove(i);
+////                i--;
+////            }
+////        }
+//
+//        Iterator<String> iter = states.iterator();
+//        while (iter.hasNext()) {
+//            if (iter.next().equals("Франция")) {
+//                iter.remove();
+//            }
+//        }
+//
+//        System.out.println(states);
+
+
+//        LinkedList<String> ll = new LinkedList<String>();
+//        ll.add("a");
+//        ll.add("b");
+//        ll.add("c");
+//        ll.add("d");
+//        ll.addFirst("firts");
+//        ll.addLast("end");
+//        System.out.println(ll);
+
+//        Box box1 = new Box("White", 2);
+//        Box box2 = new Box("White", 2);
+//        System.out.println(box1.equals(box2));
+//        System.out.println(box1.hashCode());
+//        System.out.println(box2.hashCode());
+
+
+//        HashMap<String, Integer> hm = new HashMap<String, Integer>();
+//
+//        hm.put("Васька", 1);
+//        hm.put("Мурзик", 2);
+//        hm.put("Барсик", 3);
+//
+//        Set<Map.Entry<String,Integer>> set = hm.entrySet();
+//
+//        for (Map.Entry<String, Integer> me: set) {
+//            System.out.println(me.getKey());
+//            System.out.println(me.getValue());
+//        }
+//
+//        int value = hm.get("Мурзик");
+//        System.out.println(value);
+
+//        Random random = new Random();
+//        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+//
+//        for (int i = 0; i < 100; i++) {
+//            int number = random.nextInt(10);
+//            Integer res = hm.get(number);
+//            hm.put(number, res == null ? 1 : res + 1);
+//        }
+//
+//        System.out.println(hm);
+
+
+//        HashSet<String> hs = new HashSet<String>();
+//        hs.add("Иванов");
+//        hs.add("Иванов");
+//        hs.add("Иванов");
+//        hs.add("Петров");
+//        hs.add("Сидоров");
+//
+//        System.out.println(hs);
+
+
+//        TreeSet<String> ts = new TreeSet<String>(new Sort());
+//        ts.add("C");
+//        ts.add("B");
+//        ts.add("D");
+//        ts.add("A");
+//        ts.add("F");
+//        System.out.println(ts);
+
+        HashMap<Integer, ArrayList<String>> hm = init();
+
+        hm.getOrDefault(770, new ArrayList<String>());
+//
+//        System.out.println();
+
+//
+//        String str = null;
+//        int x = 10;
+//        if(str.equalsIgnoreCase("hello") && x < 0 ) {
+//            System.out.println("java");
+//        }
+//
+//        System.out.println("end");
+
+
+
+    }
+
+
+    static HashMap<Integer, ArrayList<String>> init() {
+        HashMap<Integer, ArrayList<String>> hm = new HashMap<Integer, ArrayList<String>>();
+
+        hm.put(777, new ArrayList<String>());
+
+        return hm;
+    }
+}
+
+class Sort implements Comparator<String> {
+
+    @Override
+    public int compare(String o1, String o2) {
+        return  o2.compareTo(o1);
+    }
+}
+
+
+class Box {
+    String color;
+    int size;
+
+    public Box(String color, int size) {
+        this.color = color;
+        this.size = size;
+    }
+
+    @Override
+    public int hashCode() {
+        return size + color.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Box) {
+            Box another = (Box)obj;
+            if(this.color.equalsIgnoreCase(another.color) &&
+                    this.size == another.size) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
