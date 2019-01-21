@@ -1,81 +1,55 @@
-//       1. Напишите метод, на вход которого подаётся двумерный строковый массив размером 4х4,
-//              при подаче массива другого размера необходимо бросить исключение MyArraySizeException.
-//        2. Далее метод должен пройтись по всем элементам массива, преобразовать в int, и просуммировать.
-//              Если в каком-то элементе массива преобразование не удалось (например, в ячейке лежит символ или текст вместо числа),
-//              должно быть брошено исключение MyArrayDataException, с детализацией в какой именно ячейке лежат неверные данные.
-//        3. В методе main() вызвать полученный метод, обработать возможные исключения MySizeArrayException и MyArrayDataException,
-//               и вывести результат расчета.
+package GB;
+import java.util.*;
+
+//      1. Создать массив с набором слов (10-20 слов, должны встречаться повторяющиеся).
+//      Найти и вывести список уникальных слов, из которых состоит массив (дубликаты не считаем).
+//      Посчитать сколько раз встречается каждое слово.
+//       2. Написать простой класс Телефонный Справочник, который хранит в себе список фамилий и телефонных номеров.
+//       В этот телефонный справочник с помощью метода add() можно добавлять записи.
+//       С помощью метода get() искать номер телефона по фамилии.
+//       Следует учесть, что под одной фамилией может быть несколько телефонов (в случае однофамильцев),
+//       тогда при запросе такой фамилии должны выводиться все телефоны.
+//        Желательно как можно меньше добавлять своего, чего нет в задании
+//        (т.е. не надо в телефонную запись добавлять еще дополнительные поля (имя, отчество, адрес),
+//        делать взаимодействие с пользователем через консоль и т.д.). Консоль желательно не использовать
+//        (в том числе Scanner), тестировать просто из метода main() прописывая add() и get().
 
 public class Main {
+
     public static void main(String[] args) {
-        String[][] mas = {{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4",}};
-        try {
-            MyArray.getSizeMyArray(mas);
-        } catch (MyArraySizeException e){
-            System.out.println(e.getMessage());
+
+        // решение первой задачи
+        ArrayList<String> al = new ArrayList<String>();
+        al.add("a");
+        al.add("b");
+        al.add("c");
+        al.add("d");
+        al.add("e");
+        al.add("f");
+        al.add("d");
+        al.add("a");
+        al.add("b");
+        al.add("a");
+        counter(al);
+    }
+
+
+    public static void counter(ArrayList<String> aw) {
+        int count;
+
+        HashMap<String, String> hm = new HashMap<>();
+        String word, counchart;
+        for (int i = 1; i < aw.size(); i++) {
+            count = Collections.frequency(aw, aw.get(i));
+            word = aw.get(i);
+            counchart = String.valueOf(count);
+            hm.put(word, counchart);
         }
-
-        try {
-            MyArray.getDataMyArray(mas);
-        } catch (MyArrayDataException e){
-            System.out.println(e.getMessage());
-        }
+        System.out.println(hm);
 
     }
-}
+    // вторую не успел решить
 
-class MyArraySizeException extends Exception {
-    private String[][] arr;
 
-    public String[][] getArr() {
-        return arr;
-    }
-    public MyArraySizeException(String mag, String[][] arr){
-        super(mag);
-        this.arr = arr;
-    }
-}
 
-class MyArrayDataException extends Exception{
-    private String NumArr;
-
-    public String getNumArr() {
-        return NumArr;
-    }
-    public MyArrayDataException(String mag, String NumArr){
-        super(mag);
-        this.NumArr = NumArr;
-    }
-}
-
-class MyArray {
-    public static String[][] getSizeMyArray (String[][] arr) throws MyArraySizeException{
-        int size = 4;
-        int sum = 0;
-        if (arr.length != size | arr[1].length != size){
-            throw new MyArraySizeException("Размер массива указан неправильно", arr);
-        }
-        return arr;
-    }
-
-    public static String[][] getDataMyArray (String[][] arr) throws MyArrayDataException{
-        int[][] NumArray = new int[4][4];
-        int sum = 0;
-        boolean check = true;
-
-        for (int i = 0; i < arr.length; i++){
-            for (int j = 0; j < arr.length; j++) {
-                NumArray[i][j] = Integer.valueOf(arr[i][j]);
-                if (check != Character.isDigit(NumArray[i][j])){
-                    System.out.println(NumArray[i][j]);
-                    throw new MyArrayDataException("Не числовое выражение", arr[i][j]);
-                } else {
-                    sum += NumArray[i][j];
-
-                }
-            }
-        }
-        System.out.println(sum);
-        return arr;
-    }
 }
